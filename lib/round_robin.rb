@@ -1,11 +1,11 @@
 require 'round_robin/worker'
 
 module RoundRobin
-  def add(klass, *args)
+  def self.add(klass, *args)
 
   end
 
-  def remove(klass, *args)
+  def self.remove(klass, *args)
 
   end
 end
