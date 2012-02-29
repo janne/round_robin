@@ -1,7 +1,13 @@
 require 'round_robin'
 
 namespace :round_robin do
-  desc "Start a worker" do
+  desc "Clear all workers"
+  task :clear do
+
+  end
+
+  desc "Start a worker"
+  task :work do
     worker = RoundRobin::Worker.new
     Process.daemon(true)
     worker.work
