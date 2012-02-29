@@ -17,7 +17,7 @@ A Round Robin Job may be any Ruby class which responds to the method `perform`.
 class SearchJob
   def self.perform(search_id)
     search = Search.find(search_id)
-    # perform heavy job the search
+    # perform the search
   end
 end
 
@@ -33,8 +33,8 @@ Now fire up two workers with:
 The two workers workers will take one job at a time each and process them in order.
 
 The workers will be persisted and will be kept even after a restart of the
-server. Typically in a Rails project a RoundRobin.add can be called in an
-after_create callback and similarly a RoundRobin.remove may be called
-after_destroy.
+server. Typically in a Rails project a `RoundRobin.add` can be called in an
+`after_create` callback and similarly a `RoundRobin.remove` may be called
+`after_destroy`.
 
 Round Robin is inspired by Resque and DelayedJob.
