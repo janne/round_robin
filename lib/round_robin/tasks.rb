@@ -1,20 +1,16 @@
 require 'round_robin'
 
 namespace :round_robin do
-  desc "Clear all workers"
-  task :clear do
-
-  end
 
   desc "Start a worker"
-  task :work do
+  task :work => :environment do
     worker = RoundRobin::Worker.new
     Process.daemon(true)
     worker.work
   end
 
   desc "Start multiple workers"
-  task :workers do
+  task :workers => :environment do
     threads = []
     ENV['COUNT'].to_i.times do
       threads << Thread.new do
