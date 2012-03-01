@@ -12,3 +12,8 @@ ActiveRecord::Schema.define do
     t.timestamps
   end
 end
+
+class MyJob
+  def perform(id)
+  end
+end

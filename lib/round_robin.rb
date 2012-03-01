@@ -7,7 +7,7 @@ module RoundRobin
     RoundRobin::Job.create(:handler => json)
   end
 
-  def self.remove(klass, *args)
-
+  def self.clear
+    RoundRobin::Job.destroy_all
   end
 end
