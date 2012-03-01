@@ -3,7 +3,7 @@ require 'round_robin/job'
 
 module RoundRobin
   def self.add(klass, *args)
-    json = {:class => klass, :args => args}.to_json
+    json = {:class => klass.to_s, :args => args}.to_json
     RoundRobin::Job.create(:handler => json)
   end
 
