@@ -1,5 +1,4 @@
-require 'round_robin'
-
+require 'spec_helper'
 describe RoundRobin do
   describe "#add" do
     it "should add a job when calling add" do

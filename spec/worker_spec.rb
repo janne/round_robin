@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'round_robin'
 describe RoundRobin::Worker do
   describe "#work" do
     before do
