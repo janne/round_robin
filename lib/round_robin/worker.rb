@@ -4,7 +4,7 @@ module RoundRobin
 
     def work
       begin
-        RoundRobin::Job.order("started_at").limit(1).first.invoke_job
+        RoundRobin::Job.order("started_at").limit(1).first.try(:invoke_job)
         sleep sleep_time
       end while not shutdown
     end
