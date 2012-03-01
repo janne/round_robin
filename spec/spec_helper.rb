@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'active_record'
 require 'round_robin'
+require 'pry'
 gem 'sqlite3-ruby'
 
 ActiveRecord::Base.establish_connection(:adapter => 'sqlite3', :database => ':memory:')
