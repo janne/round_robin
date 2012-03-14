@@ -9,6 +9,10 @@ module RoundRobin
       end while not shutdown
     end
 
+    def pid
+      Process.pid
+    end
+
     private
 
     def sleep_time

@@ -6,6 +6,9 @@ namespace :round_robin do
   task :work => :environment do
     worker = RoundRobin::Worker.new
     Process.daemon(true)
+    if ENV['PIDFILE']
+      File.open(ENV['PIDFILE'], 'w') {|f| f << worker.pid }
+    end
     worker.work
   end
 

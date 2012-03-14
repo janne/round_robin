@@ -3,7 +3,7 @@ $:.unshift lib unless $:.include?(lib)
  
 Gem::Specification.new do |s|
   s.name        = "round_robin"
-  s.version     = "1.0.0"
+  s.version     = "1.1.0"
   s.authors     = ["Jan Andersson", "Kristian Hellquist"]
   s.email       = ["jan.andersson@gmail.com"]
   s.homepage    = "http://github.com/janne/round_robin"
