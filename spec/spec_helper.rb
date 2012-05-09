@@ -9,9 +9,9 @@ ActiveRecord::Base.establish_connection(:adapter => 'sqlite3', :database => ':me
 ActiveRecord::Schema.define do
   create_table :round_robin_jobs, :force => true do |t|
     t.text     :handler
-    t.datetime :started_at
-    t.datetime :finished_at
+    t.datetime :started_at, :finished_at, :invoked_at
     t.boolean  :skip
+    t.integer  :every_n_hours
     t.timestamps
   end
 end

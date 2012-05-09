@@ -29,9 +29,9 @@ describe RoundRobin::Job do
       @job.finished_at.should eql(t2)
     end
 
-    context "when skip is true" do
+    context "runnable? returns false" do
       before do
-        @job.update_attribute(:skip, true)
+        @job.should_receive(:runnable?).and_return(false)
       end
 
       it "skips jobs marked with skip but updates the timestamps" do
@@ -39,12 +39,42 @@ describe RoundRobin::Job do
         @job.invoke_job
       end
 
-      it "updates started at" do
-        lambda { @job.invoke_job }.should change(@job, :started_at)
+      it "updates invoked_at" do
+        lambda { @job.invoke_job }.should change(@job, :invoked_at)
       end
 
-      it "updates finished_at" do
-        lambda { @job.invoke_job }.should change(@job, :finished_at)
+      it "does'nt updates started_at" do
+        lambda { @job.invoke_job }.should_not change(@job, :started_at)
+      end
+
+      it "doesn't updates finished_at" do
+        lambda { @job.invoke_job }.should_not change(@job, :finished_at)
+      end
+    end
+
+    describe "#runnable" do
+      it "should normally run now" do
+        @job.should be_runnable
+      end
+
+      it "should run if it has never been run before" do
+        @job.update_attribute(:every_n_hours, 42)
+        @job.should be_runnable
+      end
+
+      it "should not run if last run was less than 42 hours ago" do
+        @job.update_attributes(:every_n_hours => 42, :invoked_at => 1.hour.ago)
+        @job.should_not be_runnable
+      end
+
+      it "should run if last run was more than 42 hours ago" do
+        @job.update_attributes(:every_n_hours => 42, :invoked_at => 50.hour.ago)
+        @job.should be_runnable
+      end
+
+      it "should not run if skipped" do
+        @job.update_attributes(:skip => true)
+        @job.should_not be_runnable
       end
     end
   end
