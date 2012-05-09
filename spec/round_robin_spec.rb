@@ -1,6 +1,11 @@
 require 'spec_helper'
 describe RoundRobin do
   describe "#add" do
+    it "should return a Job that descends from ActiveRecord::Base" do
+      job = RoundRobin.add(MyJob, 42)
+      job.should be_a ActiveRecord::Base
+    end
+
     it "should add a job when calling add" do
       lambda do
         RoundRobin.add(MyJob, 42)
