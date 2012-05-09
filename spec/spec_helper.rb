@@ -11,6 +11,7 @@ ActiveRecord::Schema.define do
     t.text     :handler
     t.datetime :started_at
     t.datetime :finished_at
+    t.boolean  :skip
     t.timestamps
   end
 end
