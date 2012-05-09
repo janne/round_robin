@@ -28,5 +28,24 @@ describe RoundRobin::Job do
       @job.started_at.should eql(t1)
       @job.finished_at.should eql(t2)
     end
+
+    context "when skip is true" do
+      before do
+        @job.update_attribute(:skip, true)
+      end
+
+      it "skips jobs marked with skip but updates the timestamps" do
+        MyJob.should_not_receive(:perform)
+        @job.invoke_job
+      end
+
+      it "updates started at" do
+        lambda { @job.invoke_job }.should change(@job, :started_at)
+      end
+
+      it "updates finished_at" do
+        lambda { @job.invoke_job }.should change(@job, :finished_at)
+      end
+    end
   end
 end

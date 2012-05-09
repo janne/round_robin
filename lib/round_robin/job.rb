@@ -9,7 +9,7 @@ module RoundRobin
         update_attributes(:started_at =>  Time.now, :finished_at => nil)
         klass = Module.const_get(parsed_handler["class"])
         args = parsed_handler["args"]
-        klass.perform(*args)
+        klass.perform(*args) unless skip
       rescue  Exception => e
 
       ensure
